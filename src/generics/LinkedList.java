@@ -20,6 +20,10 @@ public class LinkedList<E> implements Queue{
 
 	@Override
 	public void enqueue(Object e) {
+		if(first == null) {
+			first = new Node<>((E)e);
+			return;
+		}
 		Node<E> cur = first;
 		while(cur.next != null) {
 			cur = cur.next;
@@ -37,6 +41,30 @@ public class LinkedList<E> implements Queue{
 		E ret = first.val;
 		first = first.next;
 		return ret;
+	}
+	
+	public Object removeNth(int n) {
+		Node<E> cur = first;
+		Node<E> prev = null;
+		int count = 0;
+		
+		if(n>0)
+		{
+			while(count<n)
+			{
+				prev = cur;
+				cur = cur.next;
+			}
+			prev.next = cur.next;
+			return cur.val;
+			
+		}
+		
+		else
+		{
+			first = cur.next;
+			return cur.val;
+		}
 	}
 
 }
